@@ -6,6 +6,6 @@ export default class stdout {
         console.log(input)
     }
     public returnData(_: null) {
-        return "hi"
+        return '"hi"'
     }
 }

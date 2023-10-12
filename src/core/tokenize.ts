@@ -1,4 +1,3 @@
-import process from "process"
 import { TokenType } from "./types"
 
 // example syntax

@@ -1,6 +1,6 @@
 import { TokenType } from "./types";
 import fs from "fs";
-import { patterns, tokenize } from "./tokenize";
+import { tokenize } from "./tokenize";
 
 function runLibFunc(lib: string, func: string, data: any) {
     let x = fs.readdirSync("../lib") as Array<string>
@@ -19,7 +19,7 @@ function runLibFunc(lib: string, func: string, data: any) {
 export function executeTokenizedCode(tokens: Array<TokenType>): void {
     let variableMap: { [key: string]: any } = {};
 
-    console.log(tokens)
+    // console.log(tokens)
 
     for (let index = 0; index < tokens.length; index++) {
         const current = tokens[index]
@@ -45,19 +45,22 @@ export function executeTokenizedCode(tokens: Array<TokenType>): void {
             case "FUNCCALL":
                 const func = current.value.split(".")
                 let input = tokens[index+1]
+                // console.log(input)
 
                 if (input.type == "VAR_REF") input = variableMap[input.value.substring(1)]
+
+                // console.log(input)
 
                 runLibFunc(func[0], func[1], input)
         }
     }
-    console.log(variableMap)
+    // console.log(variableMap)
 }
 
 executeTokenizedCode(tokenize(`
 var x stdout.returnData null
-var y $x
-stdout.log $y
+var xCopy $x
+stdout.log $xCopy
 `))
 
 // runLibFunc("stdout", "log", '"aaa"')
