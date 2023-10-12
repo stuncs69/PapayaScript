@@ -59,7 +59,7 @@ export function tokenize(code: string) {
             } else if (patterns.FUNCCALL.test(word)) {
                 tokens.push({ type: tokenTypes.FUNCCALL, value: word })
             } else {
-                process.stdout.write(`Invalid token: ${word}\n`);
+                // ignore invalid tokens
             }
         });
     });

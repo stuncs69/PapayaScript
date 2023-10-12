@@ -6,7 +6,10 @@ class stdout {
         this.version = "0.0.1";
     }
     log(input) {
-        process.stdout.write(input);
+        console.log(input);
+    }
+    getData(input) {
+        return "hello";
     }
 }
 exports.default = stdout;
